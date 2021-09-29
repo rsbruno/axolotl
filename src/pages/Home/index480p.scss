@@ -1,0 +1,13 @@
+@import "../../global/base.scss";
+@media (max-width: 480px) {
+    #page-auth {
+        flex-direction: column;
+        aside {
+            display: none;
+        }
+        main {
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    }
+}
