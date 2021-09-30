@@ -3,8 +3,9 @@ import React,
     createContext,
     useContext,
     useState,
-    ReactNode
+    ReactNode,
 } from 'react'
+import { useEffect } from 'react'
 
 import { firebase, auth } from "../services/firebase"
 
@@ -21,14 +22,19 @@ type AuthContextData = {
 }
 
 type AuthContextProps = {
-    children: ReactNode
+    children: ReactNode;
+    value: undefined | User
 }
 
 const AuthContext = createContext({} as AuthContextData);
 
-function AuthProvider({ children }: AuthContextProps) {
+function AuthProvider({ children, value }: AuthContextProps) {
 
-    const [user, setUser] = useState<User>(undefined);
+    const [user, setUser] = useState<User>(value);
+
+    useEffect(() => {
+        setUser(value)
+    }, [value])
 
     return (
         <AuthContext.Provider value={{ user, setUser }}>

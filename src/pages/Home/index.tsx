@@ -16,8 +16,7 @@ export function Home() {
 
 
     async function handleCreateRoom() {
-
-        if(!user){
+        if(user == undefined){
             const response = await signInWithGooglePopup()
             setUser(response as User)
         }
