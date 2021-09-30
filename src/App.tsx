@@ -1,4 +1,4 @@
-import { BrowserRouter, Route } from "react-router-dom"
+import { BrowserRouter, Route, Switch } from "react-router-dom"
 
 import { NewRoom } from "./pages/NewRoom";
 import { Home } from "./pages/Home";
@@ -6,6 +6,7 @@ import { AuthProvider, User } from "./contexts/auth";
 import { useState } from "react";
 import { useEffect } from "react";
 import { auth } from "./services/firebase";
+import { Room } from "./pages/Room";
 
 function App() {
 
@@ -31,8 +32,11 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider value={user}>
-        <Route path="/room/new" component={NewRoom} />
-        <Route path="/" exact component={Home} />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/room/new" exact component={NewRoom} />
+          <Route path="/room/:id" component={Room} />
+        </Switch>
       </AuthProvider>
     </BrowserRouter>
   );
