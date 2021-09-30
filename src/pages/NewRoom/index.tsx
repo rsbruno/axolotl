@@ -6,8 +6,12 @@ import Logo from "../../assets/svg/Logo.svg"
 
 import "./styles.scss"
 import "./styles480p.scss"
+import { useAuth } from "../../contexts/auth"
 
 export function NewRoom() {
+
+    const { user } = useAuth()
+
     return (
         <div id="page-auth">
             <aside>
@@ -21,6 +25,11 @@ export function NewRoom() {
             <main>
                 <div className="main-content">
                     <img src={Logo} alt="Logo do App" />
+                    {user
+                        ? <h2>{user.displayName}</h2>
+                        : false
+                    }
+
                     <h2>Crie uma nova sala</h2>
                     <form>
                         <input type="text"

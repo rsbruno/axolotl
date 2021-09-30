@@ -6,12 +6,21 @@ import Logo from "../../assets/svg/Logo.svg"
 
 import "./index.scss"
 import "./index480p.scss"
+import { signInWithGooglePopup, useAuth, User } from "../../contexts/auth"
 
 export function Home() {
 
     const history = useHistory();
 
-    function navigateToNewRoom() {
+    const {user,setUser} = useAuth();
+
+
+    async function handleCreateRoom() {
+
+        if(!user){
+            const response = await signInWithGooglePopup()
+            setUser(response as User)
+        }
         history.push("/room/new")
     }
 
@@ -30,7 +39,7 @@ export function Home() {
                     <img src={Logo} alt="Logo do App" />
                     <button
                         className="create-room"
-                        onClick={() => navigateToNewRoom()}
+                        onClick={() => handleCreateRoom()}
                     >
                         Crie uma sala com o Google
                     </button>
